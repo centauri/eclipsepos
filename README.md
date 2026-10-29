@@ -1,4 +1,15 @@
 # EclipsePOS
+
+## Moderne retaildemo (deze fork)
+
+De nieuwe **Eclipse / Market** WPF-demo staat in [ModernPOS](ModernPOS/README.md): touchvriendelijke artikeltegels, donker/licht thema, voorbeeldartikelen, checkout, lokale bonnen en optionele echte POS for .NET-/OPOS-hardware. Zie daar de build-, installatie- en hardware-instructies en testbeperkingen. De oorspronkelijke SQL-/ERP-engine en hardwarewrappers zijn behouden; de moderne demo is een zelfstandig project.
+
+```powershell
+dotnet build ModernPOS/ModernPOS.csproj -c Release
+& .\ModernPOS\bin\Release\net48\EclipsePOS.Modern.exe
+```
+
+De onderstaande documentatie beschrijft de oorspronkelijke applicatie.
 Point of Sales for Retail and Restaurants ( C#, pos for .net)
 
 
