@@ -65,6 +65,8 @@ Bronnen: [Microsoft PosExplorer](https://learn.microsoft.com/en-us/dotnet/framew
 
 ## Beoordeling van de oorspronkelijke opbouw
 
+Update: de oorspronkelijke hoofdprojecten zijn in deze branch inmiddels naar 4.8 geretarget en de twee datalagen bouwen. Zie [de volledige Windows-controle](../docs/WINDOWS-COMPATIBILITY.md) voor de huidige stand en resterende blokkades. De onderstaande beschrijving van 4.7 betreft de ontvangen upstream-code.
+
 Bron: publieke MIT-repository `musoftware/eclipsepos`, upstream-commit `05e936be12005a9f4405adb8720c5c3abd02f36a`, zelf een fork van `naushard/EclipsePOS`.
 
 De README noemt .NET 3.5, maar de hoofdprojecten in `V.1.0.8` richten zich op **.NET Framework 4.7**. Oude Composite Application Library-onderdelen gebruiken 3.5/4.0. Workbench, Apps, Data en SystemManager zijn afzonderlijke projecten, met WPF, oude Prism/Composite en Unity. Hardware en verkoopverwerking zijn gekoppeld via applicatiecontext en events.

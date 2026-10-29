@@ -2,6 +2,8 @@
 
 ## Moderne retaildemo (deze fork)
 
+Zie ook de [Windows 10/11-controle en moderniseringsstappen](docs/WINDOWS-COMPATIBILITY.md) voor de oorspronkelijke volledige applicatie. Twee dataprojecten bouwen inmiddels op .NET Framework 4.8; de volledige app en installer zijn nog niet gevalideerd.
+
 De nieuwe **Eclipse / Market** WPF-demo staat in [ModernPOS](ModernPOS/README.md): touchvriendelijke artikeltegels, donker/licht thema, voorbeeldartikelen, checkout, lokale bonnen en optionele echte POS for .NET-/OPOS-hardware. Zie daar de build-, installatie- en hardware-instructies en testbeperkingen. De oorspronkelijke SQL-/ERP-engine en hardwarewrappers zijn behouden; de moderne demo is een zelfstandig project.
 
 ```powershell
