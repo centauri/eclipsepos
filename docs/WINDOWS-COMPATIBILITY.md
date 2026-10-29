@@ -39,7 +39,7 @@ Bewijs: `EclipsePOS.WPF.PosWorkBench.csproj` (BootstrapperPackage), beide `.wapp
 
 ### 3. Database-installatie en upgrades scheiden
 
-SQL Server 2022 Express is een mogelijke ondersteunde basis op Windows 10/11; de EclipsePOS-schema's moeten daar nog op worden getest. De app gebruikt klassieke SQL-clientcode, typed datasets en stored procedures. Dat kan werken, maar is hier niet bewezen met een SQL-instance.
+SQL Server 2025 Express is na aanvullend onderzoek de voorkeurskandidaat voor een nieuwe installatie; SQL Server 2022 Express blijft een alternatief als de doelomgeving dat vereist. De EclipsePOS-schema's moeten op de gekozen versie worden getest. De app gebruikt klassieke SQL-clientcode, typed datasets en stored procedures. Dat kan werken, maar is hier niet bewezen met een SQL-instance.
 
 De meegeleverde aanmaakscripts bevatten `CREATE DATABASE` en `DROP TABLE`. Gebruik ze uitsluitend na beoordeling voor een nieuwe, lege testdatabase. Voor upgrades zijn versiegebonden migraties, voorafgaande backup en hersteltests nodig. Bestaande klantdata mag niet door een herinstallatie worden vervangen.
 
@@ -82,6 +82,26 @@ Microsoft Sync Framework 2.1 is sinds januari 2021 uit ondersteuning. Maak voor 
 Koppel de nieuwe schermen aan bestaande autorisaties, artikel-/prijsregels, verkooptransacties en hardwarewrappers. Neem rollen en bestaande kassaworkflows mee. Voeg DPI-schaling, touch targets, focus/scannerbediening, thema's en bruikbare foutmeldingen toe. De huidige ModernPOS-demo is nog een aparte verkoopkern en kan de volledige app niet vervangen.
 
 ## Voorgestelde technische koers
+
+### Databasekeuze: aanvullend onderzocht
+
+Een moderne database kan worden gebruikt. De volgende afweging gaat specifiek over het behouden van de oorspronkelijke EclipsePOS-functionaliteit; er is nog geen database geïnstalleerd, schema gemigreerd of compatibiliteitstest op een draaiende server uitgevoerd.
+
+**SQL Server 2025 Express — voorkeursroute voor deze bestaande app.** Gratis editie, officieel beschikbaar voor Windows 10/11, met maximaal 50 GB per relationele database. Express heeft ook capaciteitslimieten: maximaal het kleinste van één socket of vier cores, en 1.410 MB bufferpool-geheugen. Geschiktheid voor meerdere kassa's moet dus met de verwachte belasting worden getest. Een 32-bit POS-client kan via het databaseprotocol met een 64-bit databaseserver werken; de POS-driverarchitectuur hoeft daarom geen database-enginekeuze te bepalen. Een lokale server kan zonder internet functioneren. Meerdere kassa's kunnen een winkelserver gebruiken, maar zijn dan wel afhankelijk van die server en het lokale netwerk.
+
+De lagere migratie-impact is een conclusie uit broninspectie: `EclipsePos.Data/ORM.xml` bevat 111 commandmappings naar 110 verschillende stored-procedurenamen. `SqlRelator.cs` gebruikt `SqlConnection`, `SqlCommand`, `SqlDbType`, outputparameters en `CommandType.StoredProcedure`. Het ene bekeken `CreatePosSite_v106.sql` bevat volgens een telling van CREATE-statements 63 tabellen en 111 procedures. Dit zijn aantallen uit specifieke bestanden, geen volledige inventaris van alle versies of bewijs dat mappings en schema exact overeenkomen. Daarnaast zijn SQL Server typed datasets en één DBML-bestand aanwezig. Een recente SQL Server houdt de bestaande API en SQL-dialectfamilie zoveel mogelijk intact, maar oude SQL en procedures moeten alsnog worden gevalideerd.
+
+**PostgreSQL 18 — goede kandidaat voor een bredere herbouw.** Een ondersteunde opensource serverdatabase met Windows-installers. De PostgreSQL-site noemt voor de EDB-installer geteste Windows Server-platforms; desktop-Windows wordt als vergelijkbaar verwacht, dus Windows 10/11-acceptatie moet zelf worden uitgevoerd. Voor EclipsePOS vereist de overstap vertaling van T-SQL/schema/procedures, andere parameter-/resultaatcontracten waar nodig, vervanging van SqlClient en LINQ-to-SQL/typed-dataset-toegang, en tests van iedere verkoop-/beheerflow. Voor een nieuwe servicegerichte architectuur is dit serieus te overwegen. Alleen de connection string veranderen is onvoldoende.
+
+**SQLite — interessant voor een enkele lokale kassa of latere offline-opslag.** Geen aparte databaseservice en geschikt voor lokale opslag. Het heeft geen SQL Server stored-procedurelaag, dus ook hier moet applicatielogica worden verplaatst of herschreven. Bewaar geld als integer in kleinste valuta-eenheid of met een expliciet geteste exacte representatie; neem SQL Server-decimalgedrag niet vanzelf aan. Deel een SQLite-bestand niet rechtstreeks via een netwerkschijf tussen kassa's. SQLite staat één gelijktijdige schrijver per database toe. Een centrale server met lokale SQLite-caches is mogelijk als ontwerp, maar vraagt nieuwe synchronisatie-, conflict- en dubbele-transactiebeveiliging; SQLite levert die niet automatisch.
+
+**Aanpak voor de eerstvolgende databaseproef:** maak op SQL Server 2025 Express een afzonderlijke lege testdatabase aan, controleer de benodigde tabellen/procedures tegen de mappings, stel een beveiligde verbinding in en test artikelen, login, prijzen, btw, volledige verkoop, annulering/retour, concurrente transactienummers en herstart/herstel. Voer eerst een backup-/restoreproef uit. Moderniseer vervolgens de toegang via een afgebakende datalaag en versiegebonden migraties. Beoordeel een overstap naar PostgreSQL of SQLite opnieuw als eenvoudige distributie, opensource hosting of zelfstandige offline-kassa's zwaarder wegen dan behoud van de bestaande datalaag.
+
+De OPOS/POS for .NET-apparaten blijven een aparte integratielaag. Een andere database maakt drivers niet automatisch incompatibel, maar het moment van definitief opslaan, printen en lade openen moet bij iedere migratie correct blijven.
+
+Bronnen: [SQL Server 2025 Express download en Windows-vereisten](https://www.microsoft.com/en-us/download/details.aspx?id=108836), [SQL Server 2025 editielimieten](https://learn.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2025?view=sql-server-ver17), [PostgreSQL-versieondersteuning](https://www.postgresql.org/support/versioning/), [PostgreSQL Windows-installers](https://www.postgresql.org/download/windows/), [SQLite toepassingsgebieden en gelijktijdigheid](https://www.sqlite.org/whentouse.html).
+
+### Applicatie en besturingssysteem
 
 **Eerst stabiliseren:** WPF + .NET Framework 4.8, passende x86/x64 POS for .NET-drivers, gecontroleerde SQL Server-installatie en een ondertekende installer. Framework 4.8 is niet de nieuwste .NET-generatie, maar wel een ondersteund Windows-onderdeel afhankelijk van de Windows-lifecycle.
 
