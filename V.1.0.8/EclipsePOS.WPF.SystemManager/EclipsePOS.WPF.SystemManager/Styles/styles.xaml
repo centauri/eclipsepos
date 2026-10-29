@@ -341,392 +341,36 @@
     </Style>
 
     <!--Simple TabItem -->
-    <Style x:Key="SimpleTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="{DynamicResource LightBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="SimpleTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
 
     <!-- Simple TabControl 
 	This template uses Simple TabItem for each Tab. The TabItems are placed in the TabPanel
 	Limitations : The Simple TabControl only allow the Tabs to be shown at the top of the Tab control. You can re-position the TabPanel to change this-->
 
-    <Style x:Key="EclipseShellTabControl" TargetType="{x:Type TabControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid KeyboardNavigation.TabNavigation="Local">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- TabPanel is a layout container which allows the TabItems to wrap and re-order when selected
-						The implementation knows to use this control because it is marked IsItemsHost = True -->
-                        <TabPanel Grid.Row="0" Margin="0,0,4,-1" x:Name="HeaderPanel" Background="{DynamicResource HeaderBrush}" IsItemsHost="True" Panel.ZIndex="1" KeyboardNavigation.TabIndex="1"/>
-
-                        <!-- Border Grid.Row="1" x:Name="Border" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="2" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2" -->
-                        <Border Grid.Row="1" x:Name="Border" Background="{DynamicResource GridBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="2" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2" >
-
-                            <!-- The implementation switches the content. This control must be named PART_SelectedContentHost -->
-                            <ContentPresenter Margin="4" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
-
-                        </Border>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseShellTabControl" TargetType="TabControl" BasedOn="{StaticResource ModernTabs}"/>
 
     <!--Simple TabItem -->
-    <Style x:Key="EclipseShellTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="AliceBlue" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="Green"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="Yellow"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="EclipseDataSourceTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource DataSourceItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseShellTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
+    <Style x:Key="EclipseDataSourceTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseOrganizationTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource OrganizationItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseOrganizationTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseOperationsTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource OperationsItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseOperationsTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseReportsTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource ReportsItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseReportsTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseInventoryTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource InventoryItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseInventoryTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseWorkbenchTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource WorkbenchItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseWorkbenchTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseNetworkConfigurationTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource NetworkConfigurationItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseNetworkConfigurationTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
-    <Style x:Key="EclipseAccpacIntergrationTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource AccpacIntergrationItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseAccpacIntergrationTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
     
     
-    <Style x:Key="EclipseUserGuideTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid>
-                        <Border Margin="0,0,-4,0" x:Name="Border" Background="Orange" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource UserGuideItemFill}"  TargetName="Border"/>
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100"/>
-                            <Setter Property="Background" Value="{DynamicResource GridBrush}"  TargetName="Border"/>
-                            <Setter Property="Foreground" Value="White"  />
-                            <Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style x:Key="EclipseUserGuideTabItem" TargetType="TabItem" BasedOn="{StaticResource ModernTab}"/>
 
-    <SolidColorBrush x:Key="GridBrush" Color="#FF1D0F48"/>
+    <SolidColorBrush x:Key="GridBrush" Color="{DynamicResource CanvasColor}"/>
     
     <SolidColorBrush x:Key="DataSourceItemFill" Color="#FFF8722E"/>
     <SolidColorBrush x:Key="OrganizationItemFill" Color="#FFEEAA2F"/>
@@ -746,37 +390,20 @@
         <GradientStop Color="#FF00598C" Offset="0"/>
         <GradientStop Color="#FF008EB5" Offset="1"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="BorderBrush" Color="#FFC1C3DC"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource LineColor}"/>
     <LinearGradientBrush x:Key="GridShadowBrush" EndPoint="0.5,1.057" StartPoint="0.5,-0.057">
         <GradientStop Color="#33FFFFFF" Offset="0"/>
         <GradientStop Color="#00000000" Offset="1"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="BottomPanelBrush" EndPoint="0.5,0.119" StartPoint="0.5,1.081">
-        <GradientStop Color="#FF0F152B" Offset="0"/>
-        <GradientStop Color="#FF5A6496" Offset="1"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="ContentAreaBrush" EndPoint="0.046,0.973" StartPoint="0.954,0.027">
-        <GradientStop Color="#FF010736" Offset="0"/>
-        <GradientStop Color="#FF165794" Offset="1"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="BottomPanelBrush" Color="{DynamicResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="ContentAreaBrush" Color="{DynamicResource SurfaceColor}"/>
     <LinearGradientBrush x:Key="TextShadowBrush" EndPoint="0.492,0.332" StartPoint="0.495,1.704">
         <GradientStop Color="#88DCDCE6" Offset="0"/>
         <GradientStop Color="#00DCDCE6" Offset="1"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="OutboxHeaderBrush" EndPoint="0.5,0.173" StartPoint="0.5,0.827">
-        <GradientStop Color="#FF2373BE" Offset="0"/>
-        <GradientStop Color="#FF6496C8" Offset="1"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="PageBackgroundBrush" EndPoint="0.989,0.068" StartPoint="0.718,0.4">
-        <GradientStop Color="#FF30265A" Offset="0"/>
-        <GradientStop Color="#FF80BEE7" Offset="1"/>
-        <GradientStop Color="#FF332B5F" Offset="0.038"/>
-        <GradientStop Color="#FF7DB8E2" Offset="0.966"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="HeaderBrush" EndPoint="1,0.5" StartPoint="0,0.5">
-        <GradientStop Color="#FF1E1941" Offset="0"/>
-        <GradientStop Color="#FF52778A" Offset="1"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="OutboxHeaderBrush" Color="{DynamicResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="PageBackgroundBrush" Color="{DynamicResource CanvasColor}"/>
+    <SolidColorBrush x:Key="HeaderBrush" Color="{DynamicResource CanvasColor}"/>
     <LinearGradientBrush x:Key="WindowBackgroundBrush1"  EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FF30265A" Offset="0"/>
         <GradientStop Color="#FF80BEE7" Offset=".992"/>

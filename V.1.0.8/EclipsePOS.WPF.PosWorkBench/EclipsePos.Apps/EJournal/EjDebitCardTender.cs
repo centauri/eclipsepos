@@ -243,10 +243,7 @@ namespace EclipsePos.Apps.EJournal
                 {
                     transTender.Add();
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                }
+                catch { throw; }
             }
             return true;
         }

@@ -47,11 +47,11 @@ namespace EclipsePos.Data
 
             try
             {
-                conn = new SqlConnection(dataSource);
+                conn = CheckoutTransaction.Current == null ? new SqlConnection(dataSource) : CheckoutTransaction.Current.Connection;
             }
             catch(Exception e)
             {
-                //MessageBox.Show(e.ToString() );
+                throw new ConfigurationErrorsException("The database connection settings are invalid.", e);
             }
       
 
@@ -76,7 +76,7 @@ namespace EclipsePos.Data
 			//Logger.Write(cmd.ToString());
 			try 
 			{
-				conn.Open();
+				if (conn.State != ConnectionState.Open) conn.Open();
 				if (cmdMap.ReturnsMultiple)
 				{	
 					SqlDataAdapter da = new SqlDataAdapter( cmd );
@@ -90,16 +90,17 @@ namespace EclipsePos.Data
 					cmd.ExecuteNonQuery();
 				}			
 				AssignOutputValuesToObject( cmd, relatee, typeMap, relationKey );
-				//conn.Close();
+				//if (CheckoutTransaction.Current == null) conn.Close(); cmd.Dispose();
 			}
 			catch(Exception e)
 			{
                 string b = e.ToString();
-                MessageBox.Show( relationKey+ "\\n" +e.ToString() );
+                if (CheckoutTransaction.Current != null) CheckoutTransaction.Current.MarkFailed();
+                throw new DataException("Database operation failed: " + relationKey, e);
 			}
 			finally
 			{
-				conn.Close();
+				if (CheckoutTransaction.Current == null) conn.Close(); cmd.Dispose();
 			}
 		}
 
@@ -139,7 +140,7 @@ namespace EclipsePos.Data
 			if (ocm != null)
 			{
 				SqlCommand cmd = new SqlCommand( ocm.StoredProcedure, conn );
-				cmd.CommandType = CommandType.StoredProcedure;
+				cmd.CommandType = CommandType.StoredProcedure; if (CheckoutTransaction.Current != null) cmd.Transaction = CheckoutTransaction.Current.Transaction;
 				foreach (object ob in ocm.PropertyMaps)
 				{
 					ORMPropertyMap propMap = (ORMPropertyMap)ob;

@@ -301,10 +301,7 @@ namespace EclipsePos.Apps.EJournal
 				{
 					transBank.Add();
 				}
-				catch ( Exception e)
-				{
-					MessageBox.Show(e.ToString());
-				}
+				catch { throw; }
 			}
 			return true;
 		}

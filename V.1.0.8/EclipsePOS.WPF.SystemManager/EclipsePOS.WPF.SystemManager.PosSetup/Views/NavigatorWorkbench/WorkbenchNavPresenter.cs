@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -174,7 +174,7 @@ namespace EclipsePOS.WPF.SystemManager.PosSetup.Views.NavigatorWorkbench
         {
             try
             {
-                Process.Start(@"..\EclipsePosWorkbench\EclipsePOS.WPF.PosWorkBench.exe");
+                Process.Start(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\EclipsePosWorkbench\EclipsePOS.WPF.PosWorkBench.exe")));
                 Application.Current.Shutdown();
             }
             catch (Exception e)

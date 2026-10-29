@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EclipsePOS.WPF.SystemManager.PosSetup.Views.Users.UsersView"
+<UserControl x:Class="EclipsePOS.WPF.SystemManager.PosSetup.Views.Users.UsersView"
    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:EclipsePOS.WPF.SystemManager.PosSetup.Views"
@@ -144,7 +144,7 @@
                     <TextBox   Grid.Row="1" Grid.Column="1" Text="{Binding Path=subscriber_name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True }" Margin="0,0,15,15" FontSize="14" Name="txtBoxUserName" Background="#FFE2EFC3"></TextBox>
                     
                     <TextBlock  Grid.Row="2" Grid.Column="0" Text="User password" Margin="15,0,0,0" Foreground="#FFFFFFFF" FontSize="14"></TextBlock>
-                    <PasswordBox   Grid.Row="2" Grid.Column="1"  Margin="0,0,15,15" FontSize="14" Name="passwordBoxUserPassword"   Background="#FFE2EFC3" w:PasswordHelper.Attach="True" w:PasswordHelper.Password="{Binding Path=subscriber_pass, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay, Converter={x:Static w:MD5ToTextConverter.Instance}}" ></PasswordBox>
+                    <PasswordBox ToolTip="Leave blank to keep the existing password. Enter a new password to replace it."   Grid.Row="2" Grid.Column="1"  Margin="0,0,15,15" FontSize="14" Name="passwordBoxUserPassword"   Background="#FFE2EFC3" w:PasswordHelper.Attach="True" w:PasswordHelper.Password="{Binding Path=subscriber_pass, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay, Converter={x:Static w:MD5ToTextConverter.Instance}}" ></PasswordBox>
 
                 </Grid>
             </StackPanel>

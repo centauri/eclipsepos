@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,106 +92,29 @@ namespace EclipsePOS.WPF.SystemManager.PosSetup.Views.NewDataSourcePrompt
        
         public bool SetupDatabase(string server, int autMode, string user, string password, string databaseName)
         {
-           
-
-            this.server1 = server;
-
-            StringBuilder str1 = new StringBuilder();
-            str1.Append("server=");
-            str1.Append(server);
-            str1.Append("; ");
-          //  str1.Append("Database=");
-          //  str1.Append(databaseName);
-          //  str1.Append("; ");
-            if (autMode == 0)
+            if (View.Mode != CreateMode.ExistingDatabase)
             {
-                str1.Append("Integrated Security=True;");
+                MessageBox.Show("Use scripts/Set-EclipseDatabase.ps1 in the Windows package to create or upgrade a SQL Server 2025 database. See WINDOWS-SETUP.md. The destructive legacy wizard has been retired.", "Database setup");
+                return false;
             }
-            else
-            {
-                str1.Append("user=");
-                str1.Append(user);
-                str1.Append(";");
-                str1.Append("password=");
-                str1.Append(password);
-                str1.Append(";");
-            }
-
-            string dataSource = str1.ToString();//"server=" + server + ";" + "Database=master;Integrated Security=True;";
-            
-            bool bContinue = false;
-
-
-
-            //Create a connection to SQL Server
             try
             {
-                sqlCon.ConnectionString = dataSource; //"Server=.\\sqlexpress;Integrated Security=true";
-                sqlCon.Open();
-            }
-            catch (SqlException sql_ex)
-            {
-                MessageBox.Show("Fail to connect to SQL Server Express\n" + sql_ex.Number.ToString() + " " + sql_ex.Message.ToString());
-                return bContinue;
-            }
-
-            //Now that you are connected to Express, check the database versions
-
-          //  string script = Regex.Replace(Properties.Resource.CreatePosSite.ToString(), "possite", databaseName);
-
-            string script = Regex.Replace(Properties.Resource.CreatePosSite_v106.ToString(), "possite", databaseName);
-            
-            string[] scripts = Regex.Split(script, "demo_data", RegexOptions.IgnoreCase);
-            /*
-            if (View.Mode == CreateMode.NewEmptyDatabase && View.IncludeSampleData )
-            {
-
-                if ( RunScript(scripts[0]) &&  RunScript(scripts[1]) )
+                var builder = new SqlConnectionStringBuilder { DataSource = server, InitialCatalog = databaseName, IntegratedSecurity = true, Encrypt = true };
+                if (autMode != 0) throw new InvalidOperationException("Use Windows authentication. SQL passwords are no longer stored in plain-text application settings.");
+                using (var connection = new SqlConnection(builder.ConnectionString))
+                using (var command = connection.CreateCommand())
                 {
-                    string connString = dataSource + "Initial Catalog=" + databaseName; //"Data Source=" + ".\\sqlexpress" + ";" + "Initial Catalog=" + "possite" + ";" + "Integrated Security=True";
-                    PosSettings.Default.DataSource = connString;
-                    PosSettings.Default.possiteConnectionString = connString;
-                    PosSettings.Default.Save();
+                    connection.Open();
+                    command.CommandText = "SELECT MAX(version) FROM dbo.EclipseSchemaVersion";
+                    if (Convert.ToInt32(command.ExecuteScalar()) != 2) throw new InvalidOperationException("Upgrade the database to schema 2 first.");
                 }
-
-            }
-            */
-
-            if (View.Mode == CreateMode.NewEmptyDatabase)
-            {
-                if (RunScript(scripts[0]))
-                {
-                    string connString = dataSource + "Initial Catalog=" + databaseName; 
-                    PosSettings.Default.DataSource = connString;
-                    PosSettings.Default.possiteConnectionString = connString;
-                    PosSettings.Default.Save();
-                }
-
-                if (View.IncludeSampleData)
-                {
-                    this.RunScript(scripts[1]);
-                }
-
-            }
-
-            if (View.Mode == CreateMode.ExistingDatabase)
-            {
-                
-                string connString = dataSource + "Initial Catalog=" + databaseName; 
-                PosSettings.Default.DataSource = connString;
-                PosSettings.Default.possiteConnectionString = connString;
+                PosSettings.Default.DataSource = builder.ConnectionString;
+                PosSettings.Default.possiteConnectionString = builder.ConnectionString;
                 PosSettings.Default.Save();
-                
+                return true;
             }
-
-      
-                                 
-            return bContinue;
-
-                    
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Database configuration failed"); return false; }
         }
-
-
         public bool RunScript(string strFile)
         {
          

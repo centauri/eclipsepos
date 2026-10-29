@@ -1,19 +1,18 @@
-# EclipsePOS
+# EclipsePOS — Windows modernization preview
 
-## Moderne retaildemo (deze fork)
+This fork now builds the **original Workbench and System Manager** on .NET Framework 4.8, alongside a separate modern retail demo. The original POS for .NET / OPOS device adapters remain.
 
-Zie ook de [Windows 10/11-controle en moderniseringsstappen](docs/WINDOWS-COMPATIBILITY.md) voor de oorspronkelijke volledige applicatie. Twee dataprojecten bouwen inmiddels op .NET Framework 4.8; de volledige app en installer zijn nog niet gevalideerd.
+Start with [Windows installation, database setup and build instructions](docs/WINDOWS-SETUP.md). The package includes a per-user installer, SQL Server 2025 provisioning/upgrades, stronger password handling, safer settings storage and a modernized original Workbench shell with light/dark themes.
 
-De nieuwe **Eclipse / Market** WPF-demo staat in [ModernPOS](ModernPOS/README.md): touchvriendelijke artikeltegels, donker/licht thema, voorbeeldartikelen, checkout, lokale bonnen en optionele echte POS for .NET-/OPOS-hardware. Zie daar de build-, installatie- en hardware-instructies en testbeperkingen. De oorspronkelijke SQL-/ERP-engine en hardwarewrappers zijn behouden; de moderne demo is een zelfstandig project.
+The standalone [ModernPOS demo](ModernPOS/README.md) runs without SQL and has sample articles and checkout; it is not the full original engine. Original-engine operation requires database setup and, for peripherals, the installed POS runtime and vendor drivers.
 
-```powershell
-dotnet build ModernPOS/ModernPOS.csproj -c Release
-& .\ModernPOS\bin\Release\net48\EclipsePOS.Modern.exe
-```
+Status: both original applications compile and render their shells. Regression checks cover password hashing, settings preservation and fractional quantities. SQL syntax is checked, but no live SQL Server or physical-device end-to-end test has been performed. Windows 10 and a signed installer rollout remain unverified. See the setup guide for exact release limitations.
 
-De onderstaande documentatie beschrijft de oorspronkelijke applicatie.
-Point of Sales for Retail and Restaurants ( C#, pos for .net)
+The [earlier compatibility audit](docs/WINDOWS-COMPATIBILITY.md) records the starting point; its build-status findings are superseded by the setup guide.
 
+## Historical upstream documentation
+
+The following is retained as background. Its SQL Server 2005/2008, .NET 3.5, installer and database-wizard instructions do not apply to this preview. Use the current setup guide above.
 
 ## How to configure and use EclipsePOS
 
@@ -152,4 +151,3 @@ Ideally, remote EclipsePOS host should synchronize data with the Server in follo
 •	Set Default startup settings in 'Store organization' tab
 •	Enter transactions and Upload transaction data
 •	Resolve any sync data conflicts if any
-

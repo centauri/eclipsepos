@@ -1,3 +1,5 @@
+> Historical audit: the original applications now build, and a preview installer and SQL Server 2025 migration path have been added. See [current setup and validation status](WINDOWS-SETUP.md).
+
 # Windows 10/11: controle en modernisering van EclipsePOS
 
 Gecontroleerd op 29 oktober 2026. Dit document gaat over de oorspronkelijke Workbench en SystemManager, naast de afzonderlijke ModernPOS-demo.

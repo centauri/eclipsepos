@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ using System.Data.Linq;
 using System.ComponentModel;
 using System.Threading;
 using EclipsePOS.WPF.SystemManager.Infrastructure.Constants;
-using EclipsePOS.WPF.SystemManager.PosSetup.SQLSetup;
+
 using System.Windows.Media.Animation;
 
 using System.Data;

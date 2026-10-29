@@ -330,3 +330,7 @@ ASALocalRun/
 .mfractor/
 
 ModernPOS/EclipsePOS-Modern-Demo.zip
+
+!**/BackupDataSourcePrompt/
+
+/artifacts/

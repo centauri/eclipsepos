@@ -624,7 +624,9 @@ namespace EclipsePos.Apps.EJournal
                 return;
             }
 
-			foreach( Object obj in ejArrayList)
+			using (var checkout = new EclipsePos.Data.CheckoutTransaction())
+            {
+            foreach( Object obj in ejArrayList)
 			{
 				EjLine ejLine = (EjLine) obj;
 
@@ -689,7 +691,9 @@ namespace EclipsePos.Apps.EJournal
 			//	MessageBox.Show("Error :- Unable to complete UpdateState-Ej");
 			//}
 
-			this.Clear();
+			checkout.Commit();
+            }
+            this.Clear();
 
 		}
 
