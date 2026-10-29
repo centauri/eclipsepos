@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EclipsePOS.WPF.SystemManager.Infrastructure.Views.Defaults.MainRegionView"
+<UserControl x:Class="EclipsePOS.WPF.SystemManager.Infrastructure.Views.Defaults.MainRegionView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rootControl" Loaded="rootControl_Loaded" >
     <UserControl.Resources>
@@ -13,7 +13,7 @@
             <GradientStop Color="#FF010736" Offset="0"/>
             <GradientStop Color="#FF165794" Offset="1"/>
         </LinearGradientBrush -->
-        <SolidColorBrush x:Key="GridBrush" Color="#FF262626"/>
+        <SolidColorBrush x:Key="GridBrush" Color="{DynamicResource CanvasColor}"/>
         <SolidColorBrush x:Key="ContentBrush" Color="#FF262626"/>
         
     </UserControl.Resources>

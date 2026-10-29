@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
@@ -216,10 +216,7 @@ namespace EclipsePos.Apps.EJournal
 				{
 					transTender.Add();
 				}
-				catch ( Exception e)
-				{
-					MessageBox.Show(e.ToString());
-				}
+				catch { throw; }
 			}
 			return true;
 		}

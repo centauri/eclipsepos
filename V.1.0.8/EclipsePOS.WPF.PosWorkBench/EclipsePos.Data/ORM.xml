@@ -32,7 +32,7 @@
     <propertymap member="Organization_no" dbtype="varchar" dbsize="6" parameter="@organization_no" direction="Input"></propertymap>
     <propertymap member="Employee_no" dbtype="varchar" dbsize="20" parameter="@employee_no" direction="Output"></propertymap>
    	<propertymap member="Logon_no" dbtype="varchar" dbsize="32" parameter="@logon_no" direction="Input"></propertymap>
-		<propertymap member="Logon_pass" dbtype="varchar" dbsize="32" parameter="@logon_pass" direction="Output"></propertymap>
+		<propertymap member="Logon_pass" dbtype="varchar" dbsize="256" parameter="@logon_pass" direction="Output"></propertymap>
 		<propertymap member="Role_id" dbtype="varchar" dbsize="7" parameter="@role_id" direction="Output"></propertymap>
 		<propertymap member="FName" dbtype="varchar" dbsize="40" parameter="@fname" direction="Output"></propertymap>
 		<propertymap member="LName" dbtype="varchar" dbsize="40" parameter="@lname" direction="Output"></propertymap>
@@ -44,7 +44,7 @@
     <propertymap member="Organization_no" dbtype="varchar" dbsize="6" parameter="@organization_no" direction="Input"></propertymap>
     <propertymap member="Employee_no" dbtype="varchar" dbsize="20" parameter="@employee_no" direction="Input"></propertymap>
     <propertymap member="Logon_no" dbtype="varchar" dbsize="32" parameter="@logon_no" direction="Output"></propertymap>
-    <propertymap member="Logon_pass" dbtype="varchar" dbsize="32" parameter="@logon_pass" direction="Output"></propertymap>
+    <propertymap member="Logon_pass" dbtype="varchar" dbsize="256" parameter="@logon_pass" direction="Output"></propertymap>
     <propertymap member="Role_id" dbtype="varchar" dbsize="7" parameter="@role_id" direction="Output"></propertymap>
     <propertymap member="FName" dbtype="varchar" dbsize="40" parameter="@fname" direction="Output"></propertymap>
     <propertymap member="LName" dbtype="varchar" dbsize="40" parameter="@lname" direction="Output"></propertymap>

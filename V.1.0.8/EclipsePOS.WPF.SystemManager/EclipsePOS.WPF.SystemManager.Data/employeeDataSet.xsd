@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="employeeDataSet" targetNamespace="http://tempuri.org/employeeDataSet.xsd" xmlns:mstns="http://tempuri.org/employeeDataSet.xsd" xmlns="http://tempuri.org/employeeDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
@@ -142,7 +142,7 @@ SELECT organization_no, employee_no, logon_no, logon_pass, role_id, fname, lname
               <xs:element name="logon_pass" msprop:Generator_UserColumnName="logon_pass" msprop:Generator_ColumnPropNameInRow="logon_pass" msprop:Generator_ColumnVarNameInTable="columnlogon_pass" msprop:Generator_ColumnPropNameInTable="logon_passColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="32" />
+                    <xs:maxLength value="256" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
 using System.Windows;
-
 namespace EclipsePOS.WPF.PosWorkBench
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-
-        public App()
+        internal static bool PreviewMode;
+        protected override void OnStartup(StartupEventArgs e)
         {
-            PosWorkBenchBootstrapper bootStrapper = new PosWorkBenchBootstrapper();
-            bootStrapper.Run();
+            base.OnStartup(e);
+            PreviewMode = e.Args.Contains("--preview") || e.Args.Contains("--smoke");
+            EclipsePOS.Platform.StartupSupport.Run(this, e, () => new PosWorkBenchShell(), () => new PosWorkBenchBootstrapper().Run());
         }
-
-
     }
 }

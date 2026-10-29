@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,13 +66,13 @@ namespace EclipsePOS.WPF.SystemManager.PosSetup.Util
             DependencyPropertyChangedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;
-            passwordBox.PasswordChanged -= PasswordChanged;
+            passwordBox.LostFocus -= PasswordChanged;
 
             if (!(bool)GetIsUpdating(passwordBox))
             {
                 passwordBox.Password = (string)e.NewValue;
             }
-            passwordBox.PasswordChanged += PasswordChanged;
+            passwordBox.LostFocus += PasswordChanged;
         }
 
         private static void Attach(DependencyObject sender,
@@ -85,12 +85,12 @@ namespace EclipsePOS.WPF.SystemManager.PosSetup.Util
 
             if ((bool)e.OldValue)
             {
-                passwordBox.PasswordChanged -= PasswordChanged;
+                passwordBox.LostFocus -= PasswordChanged;
             }
 
             if ((bool)e.NewValue)
             {
-                passwordBox.PasswordChanged += PasswordChanged;
+                passwordBox.LostFocus += PasswordChanged;
             }
         }
 

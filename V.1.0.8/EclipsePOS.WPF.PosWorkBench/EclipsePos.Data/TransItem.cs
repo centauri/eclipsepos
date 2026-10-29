@@ -47,7 +47,7 @@ namespace EclipsePos.Data
             this.Store_no = dr["store_no"].ToString();
 			this.Sku = dr["sku"].ToString();
 			this.Sku_link = dr["sku_link"].ToString();
-			this.Quantity =(int) decimal.Parse(dr["quantity"].ToString());
+			this.Quantity = Convert.ToDouble(dr["quantity"], System.Globalization.CultureInfo.InvariantCulture);
 			this.Amount = (double)decimal.Parse(dr["amount"].ToString());
 			this.Ext_amount =(double) decimal.Parse(dr["ext_amount"].ToString());
 			this.Weight = double.Parse(dr["weight"].ToString());

@@ -42,7 +42,7 @@ namespace EclipsePos.Apps.PosEvents
 			{
                 try
                 {
-                    Process.Start(@"..\EclipsePosSystemManager\EclipsePOS.WPF.SystemManager.exe");
+                    Process.Start(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\EclipsePosSystemManager\EclipsePOS.WPF.SystemManager.exe")));
                  
                     PosContext.Instance.Dispose();
                     Application.Current.Shutdown();

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="usersDataSet" targetNamespace="http://tempuri.org/usersDataSet.xsd" xmlns:mstns="http://tempuri.org/usersDataSet.xsd" xmlns="http://tempuri.org/usersDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
@@ -83,7 +83,7 @@ SELECT subscriber_id, subscriber_name, subscriber_pass FROM sub WHERE (subscribe
               <xs:element name="subscriber_pass" msprop:Generator_UserColumnName="subscriber_pass" msprop:Generator_ColumnVarNameInTable="columnsubscriber_pass" msprop:Generator_ColumnPropNameInRow="subscriber_pass" msprop:Generator_ColumnPropNameInTable="subscriber_passColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="32" />
+                    <xs:maxLength value="256" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

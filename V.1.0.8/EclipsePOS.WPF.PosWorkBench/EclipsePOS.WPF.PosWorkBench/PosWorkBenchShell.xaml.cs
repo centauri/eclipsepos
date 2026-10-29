@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +30,7 @@ namespace EclipsePOS.WPF.PosWorkBench
             HookKeyboard();
         }
 
+        private void ToggleTheme(object sender, RoutedEventArgs e) { EclipsePOS.Platform.ModernTheme.Apply(!EclipsePOS.Platform.ModernTheme.Dark); }
         public void  HookKeyboard()
         {
             //    PCKeyboard pcKeyboard = new PCKeyboard();
@@ -53,7 +54,7 @@ namespace EclipsePOS.WPF.PosWorkBench
         {
             try
             {
-                e.Cancel= true;
+                if (App.PreviewMode) return; e.Cancel= true;
 
                 Exit posEvent = new Exit();
                 posEvent.Engage(0);

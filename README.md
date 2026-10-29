@@ -1,6 +1,18 @@
-# EclipsePOS
-Point of Sales for Retail and Restaurants ( C#, pos for .net)
+# EclipsePOS — Windows modernization preview
 
+This fork now builds the **original Workbench and System Manager** on .NET Framework 4.8, alongside a separate modern retail demo. The original POS for .NET / OPOS device adapters remain.
+
+Start with [Windows installation, database setup and build instructions](docs/WINDOWS-SETUP.md). The package includes a per-user installer, SQL Server 2025 provisioning/upgrades, stronger password handling, safer settings storage and a modernized original Workbench shell with light/dark themes.
+
+The standalone [ModernPOS demo](ModernPOS/README.md) runs without SQL and has sample articles and checkout; it is not the full original engine. Original-engine operation requires database setup and, for peripherals, the installed POS runtime and vendor drivers.
+
+Status: both original applications compile and render their shells. Regression checks cover password hashing, settings preservation and fractional quantities. SQL syntax is checked, but no live SQL Server or physical-device end-to-end test has been performed. Windows 10 and a signed installer rollout remain unverified. See the setup guide for exact release limitations.
+
+The [earlier compatibility audit](docs/WINDOWS-COMPATIBILITY.md) records the starting point; its build-status findings are superseded by the setup guide.
+
+## Historical upstream documentation
+
+The following is retained as background. Its SQL Server 2005/2008, .NET 3.5, installer and database-wizard instructions do not apply to this preview. Use the current setup guide above.
 
 ## How to configure and use EclipsePOS
 
@@ -139,4 +151,3 @@ Ideally, remote EclipsePOS host should synchronize data with the Server in follo
 •	Set Default startup settings in 'Store organization' tab
 •	Enter transactions and Upload transaction data
 •	Resolve any sync data conflicts if any
-

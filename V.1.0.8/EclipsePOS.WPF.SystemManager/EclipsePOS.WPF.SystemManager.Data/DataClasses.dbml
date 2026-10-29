@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Database Name="possite" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=ECLIPSE-NPC\SQLEXPRESS;Initial Catalog=possite;Integrated Security=True" SettingsObjectName="EclipsePOS.WPF.SystemManager.Data.Properties.Settings" SettingsPropertyName="possiteConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.sub" Member="subs">
     <Type Name="sub">
       <Column Name="subscriber_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="subscriber_name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="subscriber_pass" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="subscriber_pass" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.help" Member="helps">

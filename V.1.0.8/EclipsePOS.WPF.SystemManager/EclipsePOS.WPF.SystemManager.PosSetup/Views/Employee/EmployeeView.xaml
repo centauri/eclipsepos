@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EclipsePOS.WPF.SystemManager.PosSetup.Views.Employee.EmployeeView"
+<UserControl x:Class="EclipsePOS.WPF.SystemManager.PosSetup.Views.Employee.EmployeeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:EclipsePOS.WPF.SystemManager.PosSetup.Views"
@@ -274,7 +274,7 @@
                     <TextBox    Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Path=logon_no, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="0,0,15,15" FontSize="14" Name="txtBoxLogonNo" Background="#FFE2EFC3"></TextBox>
 
                     <TextBlock  Grid.Row="2" Grid.Column="0" Text="Password number" Margin="15,0,0,0" Foreground="#FFFFFFFF" FontSize="14"></TextBlock>
-                    <PasswordBox  Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,0,15,15" FontSize="14" Name="passwordBoxLogonPass" Background="#FFE2EFC3" w:PasswordHelper.Attach="True" w:PasswordHelper.Password="{Binding Path=logon_pass, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay, Converter={x:Static w:MD5ToTextConverter.Instance} }" ></PasswordBox>
+                    <PasswordBox ToolTip="Leave blank to keep the existing password. Enter a new password to replace it."  Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,0,15,15" FontSize="14" Name="passwordBoxLogonPass" Background="#FFE2EFC3" w:PasswordHelper.Attach="True" w:PasswordHelper.Password="{Binding Path=logon_pass, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay, Converter={x:Static w:MD5ToTextConverter.Instance} }" ></PasswordBox>
 
                    
                     <TextBlock  Grid.Row="3" Grid.Column="0" Text="First name" Margin="15,0,0,0" Foreground="#FFFFFFFF" FontSize="14"></TextBlock>

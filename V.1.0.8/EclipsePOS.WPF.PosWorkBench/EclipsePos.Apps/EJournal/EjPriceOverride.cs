@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,10 +75,7 @@ namespace EclipsePos.Apps.EJournal
 
 					transItem.Add();
 				}
-				catch (Exception e)
-				{
-					Logger.Error("EjItem.cs", e.ToString() );
-				}
+				catch { throw; }
 			}
 			return true;
 		}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,7 @@ namespace EclipsePOS.WPF.SystemManager
     /// </summary>
     public partial class Shell : Window
     {
+        private void ToggleTheme(object sender, RoutedEventArgs e) { EclipsePOS.Platform.ModernTheme.Apply(!EclipsePOS.Platform.ModernTheme.Dark); }
         public Shell()
         {
             InitializeComponent();

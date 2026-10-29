@@ -1,0 +1,10 @@
+<Window x:Class="EclipsePOS.WPF.SystemManager.PosSetup.Views.BackupDataSourcePrompt.BackupDataSource"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Database backup" Width="620" Height="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+ <StackPanel Margin="24">
+  <TextBlock Text="Back up the store database" FontSize="24" Margin="0,0,0,16"/>
+  <TextBlock Text="Enter a new .bak filename on the SQL Server machine. Its service account needs write access to that folder. Existing backup sets are retained." TextWrapping="Wrap" Margin="0,0,0,12"/>
+  <TextBox x:Name="BackupPath" FontSize="16" Padding="10"/>
+  <Button x:Name="RunBackup" Content="Create and verify backup" Click="Backup_Click" Height="48" Margin="0,16,0,0"/>
+ </StackPanel>
+</Window>
